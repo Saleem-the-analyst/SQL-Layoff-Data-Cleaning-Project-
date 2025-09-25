@@ -82,7 +82,7 @@ FROM (
 -- Wildlife Studios
 -- Yahoo
 
--- NOT WORKING THIS METHODS
+-- NOT WORKING THIS METHODS to delete the > 1 duplicates rows
 
 ALTER TABLE layoff_duplucates ADD row_num INT;
 
@@ -106,38 +106,6 @@ FROM DELETE_CTE;
 select *
 from layoff_duplucates;
 
-INSERT INTO layoff_duplucates
-SELECT *
-FROM (
-		SELECT *,
-				ROW_NUMBER() 
-							OVER() AS row_num
-		FROM layoff_duplucates
-	) AS Duplucates
-    
-;
-
- UPDATE layoff_duplucates AS ld
-JOIN  (
-		SELECT 	company,location,industry,total_laid_off,percentage_laid_off,
-				`date`,stage,country,funds_raised_millions,
-				ROW_NUMBER() 
-							OVER(PARTITION BY company,location,industry,total_laid_off,percentage_laid_off,
-												`date`,stage,country,funds_raised_millions
-								) AS rn
-		FROM layoff_duplucates
-	) AS t
-ON 		ld.company 	= 				t.company
-	AND id.location = 				t.location
-    AND id.industry = 				t.industry
-    AND id.total_laid_off = 		t.total_laid_off
-    AND id.percentage_laid_off = 	t.percentage_laid_off
-    AND id.`date` = 				t.`date`
-    AND id.stage = 					t.stage
-    AND id.country = 				t.country
-    AND id.funds_raised_millions = 	t.funds_raised_millions
-    
-SET ld.row_num = t.rn;
 
 
 -- NOW THE ACCTUAL METHOD IS THIS
@@ -164,6 +132,7 @@ select *
 from layoff_duplucates2;
 
 -- here we inserting data basced on `layoff_duplucates` columns and addtionaly add `row_number function` to `row_num` column to return selected column duplicates rows 
+
 INSERT INTO layoff.layoff_duplucates2
 (company,
 location,
@@ -197,7 +166,7 @@ SELECT *
 FROM layoff_duplucates2
 WHERE row_num > 1;
 
--- now that we have this we can delete rows were row_num is greater than 2
+-- now that we have this we can delete rows where row_num is greater than 1
 
 DELETE
 FROM layoff_duplucates2
