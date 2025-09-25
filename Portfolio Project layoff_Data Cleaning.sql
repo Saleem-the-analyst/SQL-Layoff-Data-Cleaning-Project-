@@ -3,14 +3,13 @@ CREATE DATABASE Layoff;
 SELECT *
 FROM layoffs;
 
--- layoff TABLE DUPLUCATING WITH layoff_duplucates 
+-- layoff TABLE DUPLUCATING with layoff_duplucates easy further changes not effected with layoff data
 
 
 CREATE TABLE layoff_duplucates LIKE layoffs;
 
 SELECT *
-FROM
-    layoff_duplucates;
+FROM layoff_duplucates;
 
 
 INSERT layoff_duplucates
