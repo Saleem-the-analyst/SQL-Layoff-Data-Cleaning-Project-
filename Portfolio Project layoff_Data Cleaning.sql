@@ -16,10 +16,10 @@ INSERT layoff_duplucates
 SELECT * FROM layoffs;
 
 
--- 1. REMOVE DUPLICATES
--- 2. STANDARDIZE THE DATA
--- 3. NULL VALUES OR BLANK VALUES
--- 4. REMOVE ANY COLUMN OR ROW
+-- 1. Finding and Removing DUPLICATES in the columns
+-- 2. Change unknow formats to poper STANDARDIZE of the DATA
+-- 3. Identifing the  NULL VALUES OR BLANK VALUES to pull out 
+-- 4. Finally Unwanted COLUMN OR ROWs Removing from the Table 
 
 
 -- 1. REMOVE DUPLICATES
