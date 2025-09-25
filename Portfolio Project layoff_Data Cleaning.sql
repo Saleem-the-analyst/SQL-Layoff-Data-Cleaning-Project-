@@ -82,34 +82,11 @@ FROM (
 -- Wildlife Studios
 -- Yahoo
 
--- NOT WORKING THIS METHODS to delete the > 1 duplicates rows
+-- Here i got an idea acctual returned output pull into new table  `layoff_duplicates2`
+-- NOW  the query write like this 
+-- Create Duplicate table of `layoff_duplicates` to `layoff_duplicates2` 
+-- add new `row_num` column in `layoff_duplicate` 
 
-ALTER TABLE layoff_duplucates ADD row_num INT;
-
-WITH DELETE_CTE AS (
-			SELECT *
-	FROM (
-		SELECT 	company,location,industry,total_laid_off,percentage_laid_off,
-				`date`,stage,country,funds_raised_millions,
-				ROW_NUMBER() 
-							OVER(PARTITION BY company,location,industry,total_laid_off,percentage_laid_off,
-												`date`,stage,country,funds_raised_millions
-								) AS row_num
-		FROM layoff_duplucates
-	) AS Duplucates
-    
-WHERE row_num > 1)
-DELETE 
-FROM DELETE_CTE;
-
-
-select *
-from layoff_duplucates;
-
-
-
--- NOW THE ACCTUAL METHOD IS THIS
--- Create Duplicate table of layoff_duplicates to layoff_duplicates2 for add new `row_num` column
 
 ALTER TABLE layoff_duplucates ADD row_num INT;
 
@@ -176,6 +153,8 @@ SELECT *
 FROM layoff_duplucates2
 WHERE row_num > 1;
 
+
+
 -- 2. STANDARDIZE THE DATA
 
 SELECT DISTINCT COUNTRY
@@ -188,28 +167,34 @@ SELECT *
 FROM layoff_duplucates2
 WHERE COUNTRY LIKE 'United%';
 
--- we use `TRAILING` to remove '.' from 'UNITED STATES.' in country column
+-- Now UPDATE with `TRAILING` to remove '.' from 'UNITED STATES.' in country column
 
 UPDATE layoff_duplucates2
 SET country= TRIM(TRAILING '.' FROM country);
 
-select *
-from layoff_duplucates2;
+
 
 -- using `Trim` to remove unwanted space from the `company` column
+
 UPDATE layoff_duplucates2
 SET company = TRIM(company);
 
--- CHANGING INUSTRYT`BLANKS` TO `NULL` EASY TO JOIN SIMILER INDUSTRY TO THEM 
+
+
+-- Have any `BLANKS` or `NULL` in Industry Column
 
 select industry
 from layoff_duplucates2
 order by 1;
 
+-- Finding both `BLANKS` or `NULL` to pull out from the INDUSTRY 
+
 select *
 from layoff_duplucates2
 where industry is null or industry = ''
 order by industry;
+
+-- Identifying with similer rows to which Industry
 
 select *
 from layoff_duplucates2
@@ -218,9 +203,13 @@ from layoff_duplucates2
 -- where company = "Carvana" and location = 'Phoenix'; 					-- `Transport` - Industry
 where company = "Juul" and location = 'SF Bay Area';					-- `Consumer` - Industry
 
+-- UPDATING with `BLANKS` rows to NULL  
+
 UPDATE layoff_duplucates2
 SET industry = null
 WHERE industry = '';
+
+-- UPDATE tO Join with Populate Similer INDUSTRY to them
 
 UPDATE layoff_duplucates2 AS ld
 JOIN layoff_duplucates2 AS ld2
@@ -229,45 +218,45 @@ SET ld.industry = ld2.industry
 WHERE 	ld.industry IS NULL 
 	AND ld2.industry IS NOT NULL;
 
--- Changing Industry where 'Crypto Currency' AND 'CryptoCurrency' to 'Crypto'.
 
+-- Here in Industry column we find out different `Crypto` names 
 SELECT distinct industry
 FROM layoff_duplucates2
 ORDER BY industry;
 
+-- Changing Industry where 'Crypto Currency' AND 'CryptoCurrency' to 'Crypto'
 SELECT *
 FROM layoff_duplucates2
 where industry like 'Crypto%'
 ORDER BY industry;
 
--- updating the 'Crypto'
+-- updating the 'Crypto%' to `Crypto`
 
 UPDATE layoff_duplucates2
 SET industry = 'Crypto'
 where industry Like 'Crypto%';
 
--- CHANGING DATE FORMATE
+
 
 SELECT *
 FROM layoff_duplucates2
 ;
 
+-- CHANGING DATE FORMATE
 -- we can use str to date to update this field
 
 UPDATE layoff_duplucates2
 SET `date` = STR_TO_DATE(`date`, '%m/%d/%Y');
 
--- here we modify the date formate with date 
+-- here we modify the date formate with date data_type 
 
 ALTER TABLE layoff_duplucates2
 MODIFY COLUMN `date` DATE;
 
-SELECT *
-FROM layoff_duplucates2
-;
 
 -- 3. REMOVING NULL values or BLANK Values
 
+-- In total_laid_off and percentage_laid_off finding Null values
 SELECT *
 FROM layoff_duplucates2
 WHERE total_laid_off IS NULL
@@ -295,7 +284,6 @@ DROP COLUMN row_num;
 
 -- FIANALLY DATA CLEANING PROCESS IS COMPLETED.../-- 
 
--- NOW THE ACCTUAL GAME IS START DUDE...
 
 
 
