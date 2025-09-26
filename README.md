@@ -43,5 +43,5 @@ The goal was to **transform messy raw data into a clean and structured dataset**
 ---
 
 ## 📂 Repository Files  
-- `Portfolio Project layoff_Data Cleaning.sql` → Full SQL script with step-by-step cleaning process.  
+- `[Portfolio Project layoff_Data Cleaning.sq](https://github.com/Saleem-the-analyst/SQL-Layoff-Data-Cleaning-Project-/blob/main/Portfolio%20Project%20layoff_Data%20Cleaning.sql)l` → Full SQL script with step-by-step cleaning process.  
 
