@@ -5,7 +5,6 @@ FROM layoffs;
 
 -- layoff TABLE DUPLUCATING with layoff_duplucates easy further changes not effected with layoff data
 
-
 CREATE TABLE layoff_duplucates LIKE layoffs;
 
 SELECT *
