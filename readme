@@ -1,0 +1,30 @@
+# Layoff Data Cleaning & Analysis Project
+
+## Objective
+Clean and prepare a real-world layoffs dataset using SQL to ensure data accuracy and consistency for analysis.
+
+## Dataset
+- Source: (Kaggle / public dataset / mention clearly)
+- Records: X rows
+- Key columns: company, industry, country, total_laid_off, date, etc.
+
+## Tools Used
+- MySQL
+- MySQL Workbench
+
+## Data Cleaning Steps
+1. Removed duplicate records using ROW_NUMBER()
+2. Handled NULL and blank values
+3. Standardized company names and country fields
+4. Corrected date formats
+5. Validated cleaned data
+
+## SQL Techniques Used
+- CRUD operations
+- JOINs
+- Subqueries
+- Aggregate functions
+- CTEs
+
+## Outcome
+Produced a clean, analysis-ready dataset suitable for reporting and trend analysis.
