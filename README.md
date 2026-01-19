@@ -31,7 +31,12 @@ The goal was to **transform messy raw data into a clean and structured dataset**
 
 ## ⚙️ Tools Used  
 - **SQL (MySQL)**  
-- Key functions: `ROW_NUMBER()`, `TRIM()`, `IS NULL`, `DELETE`, `ALTER`, `UPDATE`, `JOIN`, `DISTINCT`, etc... 
+- Key functions: `ROW_NUMBER()`, `TRIM()`, `IS NULL`, `DELETE`, `ALTER`, `UPDATE`, `JOIN`, `DISTINCT`, etc...
+- 
+## ⚙️ Tools Used
+- SQL (MySQL)
+- CRUD Operations: SELECT, INSERT, UPDATE, DELETE
+- Key functions: ROW_NUMBER(), TRIM(), IS NULL, ALTER, JOIN, DISTINCT
 
 ---
 
