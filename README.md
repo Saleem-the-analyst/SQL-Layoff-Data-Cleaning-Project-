@@ -29,24 +29,20 @@ The goal was to **transform messy raw data into a clean and structured dataset**
 
 ---
 
-## ⚙️ Tools Used  
-- **SQL (MySQL)**  
-- Key functions: `ROW_NUMBER()`, `TRIM()`, `IS NULL`, `DELETE`, `ALTER`, `UPDATE`, `JOIN`, `DISTINCT`, etc...
-- 
+## 🔍 Validation & Data Quality Checks
+- Verified row counts before and after duplicate removal.
+- Executed NULL checks on key columns post-cleaning to ensure data completeness.
+- Re-ran aggregate queries to confirm data consistency after updates and deletions.
+
 ## ⚙️ Tools Used
 - SQL (MySQL)
-- CRUD Operations: SELECT, INSERT, UPDATE, DELETE
-- Key functions: ROW_NUMBER(), TRIM(), IS NULL, ALTER, JOIN, DISTINCT
+- CRUD Operations: `SELECT`, `INSERT`, `UPDATE`, `DELETE`
+- Key functions: `ROW_NUMBER()`, `TRIM()`, `IS NULL`, `ALTER`, `JOIN`, `DISTINCT`
 
 ---
 
 ## ✅ Final Outcome  
-- A **clean layoff dataset** that is:  
-  ✔️ Free from duplicates  
-  ✔️ Standardized and consistent  
-  ✔️ Without unnecessary nulls or unwanted rows  
-- Ready for analysis of **layoff trends, company insights, and industry impact**.  
-
+Ensured reliable and accurate data to support analysis of layoffs by company, industry, geography, and time period.
 ---
 
 ## 📂 Repository Files  
